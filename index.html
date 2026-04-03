@@ -18,7 +18,7 @@
       color: #fff;
       font-size: 30px;
       text-align: center;
-      font-family: "Times New Roman", "华文楷书", "KaiTi", serif;
+      font-family: "Times New Roman", "KaiTi", serif;
       max-width: 80vw;
       opacity: 0;
       transition: opacity 0.3s;
@@ -72,10 +72,8 @@
   <audio id="audio" loop></audio>
 
   <script>
-    // ========== 设置你的管理员密码 ==========
     const ADMIN_PASSWORD = '123456';
     
-    // ========== 你指定的文字内容 ==========
     const DEFAULT_TEXTS = `不要哭啊，小遇。
 我会回来的，在遥远的未来，我们会再次遇见。
 ……
@@ -95,7 +93,6 @@
 “呵……”
 “骗子。”`;
     
-    // DOM 元素
     const textEl = document.getElementById('text');
     const wordsArea = document.getElementById('words');
     const colorInput = document.getElementById('color');
@@ -108,12 +105,10 @@
     
     let paragraphs = [], index = -1, musicReady = false;
     
-    // 检查是否是管理员
     if (window.location.search.includes('admin=' + ADMIN_PASSWORD)) {
       document.body.classList.add('admin');
     }
     
-    // 更新文字列表
     function updateTexts() {
       let raw = wordsArea.value.trim();
       if (!raw) raw = DEFAULT_TEXTS;
@@ -122,7 +117,6 @@
       textEl.classList.remove('show');
     }
     
-    // 显示下一段
     function showNext() {
       if (!paragraphs.length) return;
       index = (index + 1) % paragraphs.length;
@@ -133,14 +127,12 @@
       }, 10);
     }
     
-    // 更新样式
     function updateStyle() {
       textEl.style.color = colorInput.value;
       textEl.style.fontSize = sizeInput.value + 'px';
       textEl.style.fontFamily = fontSelect.value;
     }
     
-    // 保存到本地
     function saveData() {
       const data = {
         texts: wordsArea.value,
@@ -165,7 +157,6 @@
       setTimeout(() => tip.remove(), 2000);
     }
     
-    // 加载数据
     function loadData() {
       const saved = localStorage.getItem('mySiteData');
       if (saved) {
@@ -183,7 +174,6 @@
       updateStyle();
     }
     
-    // 音乐自动播放
     async function tryPlayMusic() {
       if (!musicReady) return;
       try {
@@ -194,7 +184,6 @@
       }
     }
     
-    // 事件绑定
     wordsArea.oninput = updateTexts;
     colorInput.oninput = updateStyle;
     sizeInput.oninput = updateStyle;
@@ -225,7 +214,6 @@
       }
     };
     
-    // 点击屏幕切换文字
     document.body.onclick = (e) => {
       if (!e.target.closest('.admin-panel')) {
         showNext();
@@ -233,7 +221,6 @@
       }
     };
     
-    // 初始化
     loadData();
   </script>
 </body>
