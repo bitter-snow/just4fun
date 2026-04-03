@@ -1,467 +1,240 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.2">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    span.Apple-tab-span {white-space:pre}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小遇，等我回来</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    #text {
+      color: #fff;
+      font-size: 30px;
+      text-align: center;
+      font-family: "Times New Roman", "华文楷书", "KaiTi", serif;
+      max-width: 80vw;
+      opacity: 0;
+      transition: opacity 0.3s;
+      line-height: 1.6;
+    }
+    #text.show { opacity: 1; }
+    
+    .admin-panel {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.9);
+      padding: 12px;
+      border-radius: 10px;
+      display: none;
+      gap: 8px;
+      flex-wrap: wrap;
+      z-index: 100;
+      border: 1px solid #333;
+    }
+    body.admin .admin-panel { display: flex; }
+    .admin-panel input, .admin-panel button, .admin-panel textarea, .admin-panel select {
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: #222;
+      color: #fff;
+      border: 1px solid #555;
+    }
+    .admin-panel textarea { width: 100%; }
+    .admin-panel select { cursor: pointer; }
   </style>
 </head>
 <body>
-<p class="p1">&lt;html lang="zh-CN" style="--font-family: &amp;quot;Times New Roman&amp;quot;, serif; --text-color: #ffffff; --font-size: 26px; --text-align: center;"&gt;&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;点击显示文字 | 我的作品&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>:root {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--text-color: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--font-size: 36px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>--font-family: "Microsoft YaHei", sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>* {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>box-sizing: border-box;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #000;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text-color);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: var(--font-family);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* 编辑模式专用类 - 默认隐藏控制栏和提示（普通访客看不到） */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.controls {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: fixed;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>top: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>left: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>right: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>z-index: 10;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255, 255, 255, 0.08);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid rgba(255, 255, 255, 0.2);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>backdrop-filter: blur(3px);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>visibility: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transition: opacity 0.2s, visibility 0.2s;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* 编辑模式时显示控制栏（只有 ?edit=1 时可见） */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body.edit-mode .controls {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>opacity: 1;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>visibility: visible;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.controls label {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #e8e8e8;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 13px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>white-space: nowrap;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.controls input,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.controls select,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.controls button,</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.controls textarea {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>border: 1px solid #555;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>background: #111;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: #fff;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 6px 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 13px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.controls textarea {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-height: 90px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>resize: vertical;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>grid-column: 1 / -1;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.4;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.controls .group {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>gap: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.controls .group button {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>min-width: 90px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.stage {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>inset: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>padding: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: var(--text-align);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>user-select: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>#displayText {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: var(--font-size);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>line-height: 1.45;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: var(--text-color);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-family: var(--font-family);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>max-width: 80vw;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>white-space: pre-wrap;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>word-break: break-word;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transition: opacity 0.35s ease;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>#displayText.show {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>opacity: 1;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.hint {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>position: fixed;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>bottom: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>color: rgba(255, 255, 255, 0.7);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>font-size: 13px;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: none;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>visibility: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>transition: opacity 0.2s, visibility 0.2s;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>/* 编辑模式时显示提示 */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>body.edit-mode .hint {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>opacity: 1;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>visibility: visible;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="controls"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;textarea id="textInput" placeholder="每行一段文字，点击鼠标后依次显示下一段"&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>字体</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;select id="fontFamily"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="&amp;quot;Microsoft YaHei&amp;quot;, sans-serif"&gt;微软雅黑&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="Arial, sans-serif"&gt;Arial&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="&amp;quot;Times New Roman&amp;quot;, serif"&gt;Times New Roman&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="&amp;quot;Courier New&amp;quot;, monospace"&gt;Courier New&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>颜色</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input id="textColor" type="color" value="#ffffff"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>大小(px)</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input id="fontSize" type="number" min="12" max="180" value="36"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>对齐</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;select id="textAlign"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="left"&gt;左对齐&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="center" selected=""&gt;居中&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;option value="right"&gt;右对齐&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>添加音乐</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input id="musicFile" type="file" accept="audio/*"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button id="toggleMusic" type="button"&gt;播放音乐&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button id="resetText" type="button"&gt;重置文字&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;main class="stage" id="stage"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="displayText" class="show"&gt;“骗子。”&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/main&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="hint"&gt;提示：点击黑色区域显示下一段文字（首次点击开始）&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;audio id="bgm" loop="" src="blob:http://127.0.0.1:5500/035060f4-6ff2-4616-96d2-457fc21628ec"&gt;&lt;/audio&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==================== 🎯 在这里修改你预设的文字内容 ====================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const DEFAULT_TEXTS = `你好，朋友</p>
-<p class="p1">欢迎来到我的个人小站</p>
-<p class="p1">这是第二段文字</p>
-<p class="p1">点击鼠标会依次切换段落</p>
-<p class="p1">你可以在这里放上你的自我介绍</p>
-<p class="p1">或者一句喜欢的诗</p>
-<p class="p1">最后一段，谢谢观看！`;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ====================================================================</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ==================== 🎵 预设音乐文件（放在仓库同目录下）====================</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 方法1：把音乐文件（比如 music.mp3）放在和 index.html 同一文件夹</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 然后把下面的 'music.mp3' 改成你的文件名</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const DEFAULT_MUSIC_URL = '';<span class="Apple-converted-space">  </span>// 例如: 'background-music.mp3' 或留空不启用</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 如果要使用远程音乐链接，可以填 https://... 开头的网址</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// const DEFAULT_MUSIC_URL = 'https://example.com/music.mp3';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>// ====================================================================</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const stage = document.getElementById("stage");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const displayText = document.getElementById("displayText");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const textInput = document.getElementById("textInput");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const fontFamily = document.getElementById("fontFamily");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const textColor = document.getElementById("textColor");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const fontSize = document.getElementById("fontSize");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const textAlign = document.getElementById("textAlign");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const musicFile = document.getElementById("musicFile");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const bgm = document.getElementById("bgm");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const toggleMusic = document.getElementById("toggleMusic");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const resetTextBtn = document.getElementById("resetText");</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>let paragraphs = [];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let currentIndex = -1;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>let musicReady = false;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 检测URL参数，判断是否进入编辑模式</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function checkEditMode() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const urlParams = new URLSearchParams(window.location.search);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const editParam = urlParams.get('edit');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (editParam === '1') {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.body.classList.add('edit-mode');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.body.classList.remove('edit-mode');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function parseParagraphs() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>paragraphs = textInput.value</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.split("\n")</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.map((t) =&gt; t.trim())</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.filter(Boolean);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (currentIndex &gt;= paragraphs.length) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>currentIndex = paragraphs.length - 1;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function updateStyle() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.documentElement.style.setProperty("--font-family", fontFamily.value);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.documentElement.style.setProperty("--text-color", textColor.value);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.documentElement.style.setProperty("--font-size", `${Number(fontSize.value) || 36}px`);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.documentElement.style.setProperty("--text-align", textAlign.value);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function showNextText() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!paragraphs.length) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>displayText.textContent = "";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>displayText.classList.remove("show");</p>
-<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (currentIndex &lt; paragraphs.length - 1) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>currentIndex += 1;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>displayText.classList.remove("show");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>requestAnimationFrame(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>displayText.textContent = paragraphs[currentIndex];</p>
-<p class="p1"><span class="Apple-converted-space">        </span>displayText.classList.add("show");</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function resetText() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>parseParagraphs();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>currentIndex = -1;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>displayText.textContent = "";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>displayText.classList.remove("show");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 预设音乐加载（如果配置了默认音乐）</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function loadDefaultMusic() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (DEFAULT_MUSIC_URL &amp;&amp; DEFAULT_MUSIC_URL.trim() !== '') {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>bgm.src = DEFAULT_MUSIC_URL;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>musicReady = true;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>toggleMusic.textContent = "播放音乐";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// 可选：自动播放（注意浏览器策略，可能需要用户交互）</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// 为了更好的体验，不自动播放，让用户点击播放按钮</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 保存设置到 localStorage（非编辑模式下也保留用户的选择）</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function saveSettings() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const settings = {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>fontFamily: fontFamily.value,</p>
-<p class="p1"><span class="Apple-converted-space">        </span>textColor: textColor.value,</p>
-<p class="p1"><span class="Apple-converted-space">        </span>fontSize: fontSize.value,</p>
-<p class="p1"><span class="Apple-converted-space">        </span>textAlign: textAlign.value</p>
-<p class="p1"><span class="Apple-converted-space">      </span>};</p>
-<p class="p1"><span class="Apple-converted-space">      </span>localStorage.setItem('pageSettings', JSON.stringify(settings));</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function loadSettings() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const saved = localStorage.getItem('pageSettings');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (saved) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>try {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>const settings = JSON.parse(saved);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>if (settings.fontFamily) fontFamily.value = settings.fontFamily;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>if (settings.textColor) textColor.value = settings.textColor;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>if (settings.fontSize) fontSize.value = settings.fontSize;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>if (settings.textAlign) textAlign.value = settings.textAlign;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>updateStyle();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>} catch(e) {}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 保存文字内容到 localStorage（非编辑模式下）</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function saveTextContent() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>localStorage.setItem('savedTexts', textInput.value);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function loadTextContent() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const saved = localStorage.getItem('savedTexts');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (saved &amp;&amp; saved.trim() !== '') {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>textInput.value = saved;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>textInput.value = DEFAULT_TEXTS;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>parseParagraphs();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 保存音乐URL</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function saveMusicURL(url) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (url) localStorage.setItem('musicURL', url);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function loadMusicURL() {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const saved = localStorage.getItem('musicURL');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (saved &amp;&amp; saved.trim() !== '') {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>bgm.src = saved;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>musicReady = true;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>toggleMusic.textContent = "播放音乐";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else if (DEFAULT_MUSIC_URL &amp;&amp; DEFAULT_MUSIC_URL.trim() !== '') {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>loadDefaultMusic();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 事件绑定</p>
-<p class="p1"><span class="Apple-converted-space">    </span>stage.addEventListener("click", showNextText);</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>[fontFamily, textColor, fontSize, textAlign].forEach((el) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>el.addEventListener("input", () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>updateStyle();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>saveSettings();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">      </span>el.addEventListener("change", () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>updateStyle();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>saveSettings();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>textInput.addEventListener("input", () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>parseParagraphs();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>saveTextContent();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>resetTextBtn.addEventListener("click", () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>resetText();</p>
-<p class="p1"><span class="Apple-converted-space">      </span>saveTextContent();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>musicFile.addEventListener("change", () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const file = musicFile.files &amp;&amp; musicFile.files[0];</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!file) return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const fileURL = URL.createObjectURL(file);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>bgm.src = fileURL;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>musicReady = true;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>toggleMusic.textContent = "播放音乐";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>saveMusicURL(fileURL);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>toggleMusic.addEventListener("click", async () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (!musicReady) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// 如果没有音乐，提示用户</p>
-<p class="p1"><span class="Apple-converted-space">        </span>alert("请先通过「添加音乐」上传音乐文件");</p>
-<p class="p1"><span class="Apple-converted-space">        </span>return;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (bgm.paused) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>try {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>await bgm.play();</p>
-<p class="p1"><span class="Apple-converted-space">          </span>toggleMusic.textContent = "暂停音乐";</p>
-<p class="p1"><span class="Apple-converted-space">        </span>} catch (err) {</p>
-<p class="p1"><span class="Apple-converted-space">          </span>console.error("音乐播放失败:", err);</p>
-<p class="p1"><span class="Apple-converted-space">          </span>alert("播放失败，请点击页面任意位置后重试");</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>bgm.pause();</p>
-<p class="p1"><span class="Apple-converted-space">        </span>toggleMusic.textContent = "播放音乐";</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>});</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 初始化</p>
-<p class="p1"><span class="Apple-converted-space">    </span>checkEditMode();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>loadSettings();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>loadTextContent();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>loadMusicURL();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>updateStyle();</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>// 如果当前不是编辑模式，给访客一个友好的提示（显示几秒后淡出）</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if (!document.body.classList.contains('edit-mode')) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const tip = document.createElement('div');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.textContent = '✨ 点击屏幕任意位置，切换文字 ✨';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.style.position = 'fixed';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.style.bottom = '20px';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.style.left = '50%';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.style.transform = 'translateX(-50%)';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.style.color = 'rgba(255,255,255,0.6)';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.style.fontSize = '14px';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.style.backgroundColor = 'rgba(0,0,0,0.5)';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.style.padding = '6px 12px';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.style.borderRadius = '20px';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.style.zIndex = '999';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.style.pointerEvents = 'none';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>tip.style.whiteSpace = 'nowrap';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>document.body.appendChild(tip);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>setTimeout(() =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>tip.style.opacity = '0';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>tip.style.transition = 'opacity 1s';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>setTimeout(() =&gt; tip.remove(), 1000);</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}, 3000);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
-<p class="p1">&lt;!-- Code injected by live-server --&gt;</p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1"><span class="Apple-tab-span">	</span>// &lt;![CDATA[<span class="Apple-converted-space">  </span>&lt;-- For SVG support</p>
-<p class="p1"><span class="Apple-tab-span">	</span>if ('WebSocket' in window) {</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>(function () {</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>function refreshCSS() {</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var sheets = [].slice.call(document.getElementsByTagName("link"));</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var head = document.getElementsByTagName("head")[0];</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>for (var i = 0; i &lt; sheets.length; ++i) {</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var elem = sheets[i];</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var parent = elem.parentElement || head;</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>parent.removeChild(elem);</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var rel = elem.rel;</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (elem.href &amp;&amp; typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var url = elem.href.replace(/(&amp;|\?)_cacheOverride=\d+/, '');</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>elem.href = url + (url.indexOf('?') &gt;= 0 ? '&amp;' : '?') + '_cacheOverride=' + (new Date().valueOf());</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>parent.appendChild(elem);</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var address = protocol + window.location.host + window.location.pathname + '/ws';</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>var socket = new WebSocket(address);</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>socket.onmessage = function (msg) {</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (msg.data == 'reload') window.location.reload();</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>else if (msg.data == 'refreshcss') refreshCSS();</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>};</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>if (sessionStorage &amp;&amp; !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>console.log('Live reload enabled.');</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>}</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>})();</p>
-<p class="p1"><span class="Apple-tab-span">	</span>}</p>
-<p class="p1"><span class="Apple-tab-span">	</span>else {</p>
-<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');</p>
-<p class="p1"><span class="Apple-tab-span">	</span>}</p>
-<p class="p1"><span class="Apple-tab-span">	</span>// ]]&gt;</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/body&gt;&lt;/html&gt;</p>
+  <div id="text"></div>
+  
+  <div class="admin-panel">
+    <textarea id="words" rows="4" placeholder="每行一段文字"></textarea>
+    <input type="color" id="color" value="#ffffff">
+    <input type="number" id="size" value="30" min="12" max="120">
+    <select id="font">
+      <option value="Times New Roman, KaiTi, serif">衬线体</option>
+      <option value="微软雅黑, sans-serif">微软雅黑</option>
+      <option value="Arial, sans-serif">Arial</option>
+    </select>
+    <input type="file" id="music" accept="audio/*">
+    <button id="playBtn">▶ 播放音乐</button>
+    <button id="saveBtn">💾 保存</button>
+  </div>
+  
+  <audio id="audio" loop></audio>
+
+  <script>
+    // ========== 设置你的管理员密码 ==========
+    const ADMIN_PASSWORD = '123456';
+    
+    // ========== 你指定的文字内容 ==========
+    const DEFAULT_TEXTS = `不要哭啊，小遇。
+我会回来的，在遥远的未来，我们会再次遇见。
+……
+真的？
+哪怕隔了很久的岁月，我们的双手依然交叠？
+真的，来，拉着我的手———
+我向你保证。
+呜……
+那你一定要回来。
+一定要……记得我。
+好～
+我很快就会回来的～
+姑姑还等着小遇赚大钱养我呢～
+我的小遇一定会成为很棒的大人——
+这么重要的事，我怎么会缺席呢？
+……
+“呵……”
+“骗子。”`;
+    
+    // DOM 元素
+    const textEl = document.getElementById('text');
+    const wordsArea = document.getElementById('words');
+    const colorInput = document.getElementById('color');
+    const sizeInput = document.getElementById('size');
+    const fontSelect = document.getElementById('font');
+    const musicInput = document.getElementById('music');
+    const playBtn = document.getElementById('playBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const audio = document.getElementById('audio');
+    
+    let paragraphs = [], index = -1, musicReady = false;
+    
+    // 检查是否是管理员
+    if (window.location.search.includes('admin=' + ADMIN_PASSWORD)) {
+      document.body.classList.add('admin');
+    }
+    
+    // 更新文字列表
+    function updateTexts() {
+      let raw = wordsArea.value.trim();
+      if (!raw) raw = DEFAULT_TEXTS;
+      paragraphs = raw.split('\n').filter(l => l.trim());
+      index = -1;
+      textEl.classList.remove('show');
+    }
+    
+    // 显示下一段
+    function showNext() {
+      if (!paragraphs.length) return;
+      index = (index + 1) % paragraphs.length;
+      textEl.classList.remove('show');
+      setTimeout(() => {
+        textEl.textContent = paragraphs[index];
+        textEl.classList.add('show');
+      }, 10);
+    }
+    
+    // 更新样式
+    function updateStyle() {
+      textEl.style.color = colorInput.value;
+      textEl.style.fontSize = sizeInput.value + 'px';
+      textEl.style.fontFamily = fontSelect.value;
+    }
+    
+    // 保存到本地
+    function saveData() {
+      const data = {
+        texts: wordsArea.value,
+        color: colorInput.value,
+        size: sizeInput.value,
+        font: fontSelect.value
+      };
+      localStorage.setItem('mySiteData', JSON.stringify(data));
+      
+      const tip = document.createElement('div');
+      tip.textContent = '✓ 已保存！刷新页面即可看到效果';
+      tip.style.position = 'fixed';
+      tip.style.bottom = '100px';
+      tip.style.left = '50%';
+      tip.style.transform = 'translateX(-50%)';
+      tip.style.backgroundColor = '#4caf50';
+      tip.style.color = 'white';
+      tip.style.padding = '8px 16px';
+      tip.style.borderRadius = '20px';
+      tip.style.zIndex = '999';
+      document.body.appendChild(tip);
+      setTimeout(() => tip.remove(), 2000);
+    }
+    
+    // 加载数据
+    function loadData() {
+      const saved = localStorage.getItem('mySiteData');
+      if (saved) {
+        try {
+          const data = JSON.parse(saved);
+          wordsArea.value = data.texts || DEFAULT_TEXTS;
+          colorInput.value = data.color || '#ffffff';
+          sizeInput.value = data.size || '30';
+          fontSelect.value = data.font || 'Times New Roman, KaiTi, serif';
+        } catch(e) {}
+      } else {
+        wordsArea.value = DEFAULT_TEXTS;
+      }
+      updateTexts();
+      updateStyle();
+    }
+    
+    // 音乐自动播放
+    async function tryPlayMusic() {
+      if (!musicReady) return;
+      try {
+        await audio.play();
+        playBtn.textContent = '⏸ 暂停音乐';
+      } catch(e) {
+        playBtn.textContent = '▶ 播放音乐';
+      }
+    }
+    
+    // 事件绑定
+    wordsArea.oninput = updateTexts;
+    colorInput.oninput = updateStyle;
+    sizeInput.oninput = updateStyle;
+    fontSelect.onchange = updateStyle;
+    
+    saveBtn.onclick = saveData;
+    
+    musicInput.onchange = () => {
+      const file = musicInput.files[0];
+      if (file) {
+        audio.src = URL.createObjectURL(file);
+        musicReady = true;
+        tryPlayMusic();
+      }
+    };
+    
+    playBtn.onclick = async () => {
+      if (!musicReady) {
+        alert('请先点击"选择文件"上传音乐');
+        return;
+      }
+      if (audio.paused) {
+        await audio.play();
+        playBtn.textContent = '⏸ 暂停音乐';
+      } else {
+        audio.pause();
+        playBtn.textContent = '▶ 播放音乐';
+      }
+    };
+    
+    // 点击屏幕切换文字
+    document.body.onclick = (e) => {
+      if (!e.target.closest('.admin-panel')) {
+        showNext();
+        if (musicReady && audio.paused) tryPlayMusic();
+      }
+    };
+    
+    // 初始化
+    loadData();
+  </script>
 </body>
 </html>
