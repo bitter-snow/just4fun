@@ -1,8 +1,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>小遇，等我回来</title>
+  <title>200kudos感谢</title>
   <style>
     body {
       margin: 0;
@@ -25,7 +24,6 @@
       line-height: 1.6;
     }
     #text.show { opacity: 1; }
-    
     .admin-panel {
       position: fixed;
       bottom: 20px;
@@ -49,27 +47,21 @@
       border: 1px solid #555;
     }
     .admin-panel textarea { width: 100%; }
-    .admin-panel select { cursor: pointer; }
   </style>
 </head>
 <body>
   <div id="text"></div>
-  
   <div class="admin-panel">
-    <textarea id="words" rows="4" placeholder="每行一段文字"></textarea>
+    <textarea id="words" rows="4"></textarea>
     <input type="color" id="color" value="#ffffff">
-    <input type="number" id="size" value="30" min="12" max="120">
+    <input type="number" id="size" value="30">
     <select id="font">
       <option value="Times New Roman, KaiTi, serif">衬线体</option>
       <option value="微软雅黑, sans-serif">微软雅黑</option>
       <option value="Arial, sans-serif">Arial</option>
     </select>
-    <input type="file" id="music" accept="audio/*">
-    <button id="playBtn">▶ 播放音乐</button>
     <button id="saveBtn">💾 保存</button>
   </div>
-  
-  <audio id="audio" loop></audio>
 
   <script>
     const ADMIN_PASSWORD = '123456';
@@ -98,14 +90,11 @@
     const colorInput = document.getElementById('color');
     const sizeInput = document.getElementById('size');
     const fontSelect = document.getElementById('font');
-    const musicInput = document.getElementById('music');
-    const playBtn = document.getElementById('playBtn');
     const saveBtn = document.getElementById('saveBtn');
-    const audio = document.getElementById('audio');
     
-    let paragraphs = [], index = -1, musicReady = false;
+    let paragraphs = [], currentIndex = -1;
     
-    if (window.location.search.includes('admin=' + ADMIN_PASSWORD)) {
+    if (location.search.includes('admin=' + ADMIN_PASSWORD)) {
       document.body.classList.add('admin');
     }
     
@@ -113,16 +102,17 @@
       let raw = wordsArea.value.trim();
       if (!raw) raw = DEFAULT_TEXTS;
       paragraphs = raw.split('\n').filter(l => l.trim());
-      index = -1;
+      currentIndex = -1;
       textEl.classList.remove('show');
     }
     
     function showNext() {
       if (!paragraphs.length) return;
-      index = (index + 1) % paragraphs.length;
+      if (currentIndex >= paragraphs.length - 1) return;
+      currentIndex++;
       textEl.classList.remove('show');
       setTimeout(() => {
-        textEl.textContent = paragraphs[index];
+        textEl.textContent = paragraphs[currentIndex];
         textEl.classList.add('show');
       }, 10);
     }
@@ -134,39 +124,19 @@
     }
     
     function saveData() {
-      const data = {
-        texts: wordsArea.value,
-        color: colorInput.value,
-        size: sizeInput.value,
-        font: fontSelect.value
-      };
+      const data = { texts: wordsArea.value, color: colorInput.value, size: sizeInput.value, font: fontSelect.value };
       localStorage.setItem('mySiteData', JSON.stringify(data));
-      
-      const tip = document.createElement('div');
-      tip.textContent = '✓ 已保存！刷新页面即可看到效果';
-      tip.style.position = 'fixed';
-      tip.style.bottom = '100px';
-      tip.style.left = '50%';
-      tip.style.transform = 'translateX(-50%)';
-      tip.style.backgroundColor = '#4caf50';
-      tip.style.color = 'white';
-      tip.style.padding = '8px 16px';
-      tip.style.borderRadius = '20px';
-      tip.style.zIndex = '999';
-      document.body.appendChild(tip);
-      setTimeout(() => tip.remove(), 2000);
+      alert('✓ 已保存');
     }
     
     function loadData() {
       const saved = localStorage.getItem('mySiteData');
       if (saved) {
-        try {
-          const data = JSON.parse(saved);
-          wordsArea.value = data.texts || DEFAULT_TEXTS;
-          colorInput.value = data.color || '#ffffff';
-          sizeInput.value = data.size || '30';
-          fontSelect.value = data.font || 'Times New Roman, KaiTi, serif';
-        } catch(e) {}
+        const data = JSON.parse(saved);
+        wordsArea.value = data.texts || DEFAULT_TEXTS;
+        colorInput.value = data.color || '#ffffff';
+        sizeInput.value = data.size || '30';
+        fontSelect.value = data.font || 'Times New Roman, KaiTi, serif';
       } else {
         wordsArea.value = DEFAULT_TEXTS;
       }
@@ -174,50 +144,15 @@
       updateStyle();
     }
     
-    async function tryPlayMusic() {
-      if (!musicReady) return;
-      try {
-        await audio.play();
-        playBtn.textContent = '⏸ 暂停音乐';
-      } catch(e) {
-        playBtn.textContent = '▶ 播放音乐';
-      }
-    }
-    
     wordsArea.oninput = updateTexts;
     colorInput.oninput = updateStyle;
     sizeInput.oninput = updateStyle;
     fontSelect.onchange = updateStyle;
-    
     saveBtn.onclick = saveData;
-    
-    musicInput.onchange = () => {
-      const file = musicInput.files[0];
-      if (file) {
-        audio.src = URL.createObjectURL(file);
-        musicReady = true;
-        tryPlayMusic();
-      }
-    };
-    
-    playBtn.onclick = async () => {
-      if (!musicReady) {
-        alert('请先点击"选择文件"上传音乐');
-        return;
-      }
-      if (audio.paused) {
-        await audio.play();
-        playBtn.textContent = '⏸ 暂停音乐';
-      } else {
-        audio.pause();
-        playBtn.textContent = '▶ 播放音乐';
-      }
-    };
     
     document.body.onclick = (e) => {
       if (!e.target.closest('.admin-panel')) {
         showNext();
-        if (musicReady && audio.paused) tryPlayMusic();
       }
     };
     
