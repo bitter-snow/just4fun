@@ -1,7 +1,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>200kudos感谢</title>
+  <title>雪师傅的200kudos特别感谢！</title>
   <style>
     body {
       margin: 0;
@@ -15,7 +15,7 @@
     }
     #text {
       color: #fff;
-      font-size: 30px;
+      font-size: 36px;
       text-align: center;
       font-family: "Times New Roman", "KaiTi", serif;
       max-width: 80vw;
@@ -93,6 +93,16 @@
     const saveBtn = document.getElementById('saveBtn');
     
     let paragraphs = [], currentIndex = -1;
+    
+    // ========== 音乐（用户第一次点击页面时播放）==========
+    const audio = new Audio('yythx.m4a');
+    audio.loop = true;
+    
+    document.body.addEventListener('click', function playMusic() {
+      audio.play().catch(e => console.log('播放失败:', e));
+      document.body.removeEventListener('click', playMusic);
+    }, { once: true });
+    // =================================================
     
     if (location.search.includes('admin=' + ADMIN_PASSWORD)) {
       document.body.classList.add('admin');
